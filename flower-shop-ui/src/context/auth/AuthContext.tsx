@@ -9,7 +9,7 @@ const AuthContext =
   React.createContext<AuthContextInterface>(authContextDefaults);
 
 const AuthProvider = ({ children }: Props) => {
-  //TODO: code for pre-loading the user's info if we have their token in
+  //TODO: code for pre-loading the user's info if we have their token in local storage
   // const [data, setData] = React.useState<AuthData>({});
   const data = {};
 

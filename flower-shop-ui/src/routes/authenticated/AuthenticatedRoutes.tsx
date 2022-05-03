@@ -8,8 +8,9 @@ const AuthenticatedRoutes = () => {
     <div>
       <h1>Authenticated App</h1>
       <Routes>
-        <Route path="/homepage" element={<Homepage />}></Route>
-        <Route path="/shop" element={<Shop />}></Route>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="*" element={<div>not found</div>} />
       </Routes>
     </div>
   );
