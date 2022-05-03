@@ -1,16 +1,17 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import CustomRoutes from "routes";
+import { useUser } from "context";
+
+const AuthenticatedApp = React.lazy(
+  () => import("routes/authenticated/AuthenticatedRoutes")
+);
+
+const UnauthenticatedApp = React.lazy(
+  () => import("routes/unauthenticated/UnauthenticatedRoutes")
+);
 
 function App() {
-  return (
-    <div>
-      <h1>App</h1>
-      <BrowserRouter>
-        <CustomRoutes />
-      </BrowserRouter>
-    </div>
-  );
+  const user = useUser();
+  return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
 }
 
 export default App;
