@@ -55,4 +55,8 @@
 
 .icon-group__icon {
   margin-right: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

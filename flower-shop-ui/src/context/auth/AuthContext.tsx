@@ -26,7 +26,9 @@ const AuthProvider = ({ children }: Props) => {
 
   const login = () => {}; // make a login request
   const register = () => {}; // register the user
-  const logout = () => {}; // logout the user
+  const logout = () => {
+    window.localStorage.removeItem("flowerUiAuthToken");
+  }; // logout the user
 
   return (
     <AuthContext.Provider value={{ data, login, logout, register }}>

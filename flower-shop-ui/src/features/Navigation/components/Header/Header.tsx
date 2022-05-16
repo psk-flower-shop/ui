@@ -7,9 +7,23 @@ import loginIcon from "static/svgs/Login.svg";
 import logoutIcon from "static/svgs/Logout.svg";
 import "./Header.scss";
 import { useUser } from "context";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "context/auth/AuthContext";
 
 const Header = () => {
+  const { logout } = useAuth();
   const user = useUser();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/"); //NOT SURE IF THIS WILL WORK
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="header">
       <div className="location-group">
@@ -22,8 +36,19 @@ const Header = () => {
         <img alt="cart" src={cartIcon} className="icon-group__icon" />
         <img alt="wishlist" src={wishlistIcon} className="icon-group__icon" />
         {user ? (
-        <img alt="logout" src={logoutIcon} className="icon-group__icon" />) : (
-        <img alt="login" src={loginIcon} className="icon-group__icon" />
+          <img
+            alt="logout"
+            src={logoutIcon}
+            className="icon-group__icon"
+            onClick={handleLogout}
+          />
+        ) : (
+          <img
+            alt="login"
+            src={loginIcon}
+            className="icon-group__icon"
+            onClick={handleLogin}
+          />
         )}
       </div>
     </div>

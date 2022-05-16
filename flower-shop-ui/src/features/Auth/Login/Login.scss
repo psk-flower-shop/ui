@@ -1,0 +1,90 @@
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-text {
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+
+  color: #000000; 
+}
+
+.form {
+  margin-top: 12px;
+}
+
+.input {
+  background: #F9F9FB;
+  padding: 8px 16px;
+  margin-bottom: 4px;
+
+  border: 1px solid #E6E6EB;
+  border-radius: 4px;
+
+}
+
+.input::placeholder {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+
+}
+
+.submit {
+  background: #FFFFFF;
+  padding: 8px 16px;
+  margin-top: 12px;
+  width: 100%;
+
+  border: 1px solid #595CFF;
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.register-link {
+  margin-top: 64px;
+}
+
+.register-label {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+
+
+  color: #979797;
+}
+
+.register-button {
+  background: #FFFFFF;
+  padding: 8px 16px;
+  margin-top: 4px;
+  width: 100%;
+
+  border: 1px solid #595CFF;
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.error {
+  color: #FF0000;
+  font-size: 14px;
+}
