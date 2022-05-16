@@ -16,13 +16,13 @@ function App() {
   const user = useUser();
 
   return (
-    <>
+    <div className="body">
       <Navigation />
       <div className="route-content">
         {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
