@@ -1,0 +1,293 @@
+.dashboard-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flowers-container {
+  position: relative;
+}
+
+.flowers-content {
+  position: absolute;
+  top: 43px;
+  left: 80px;
+}
+
+.flowers-best-text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.flowers-offer-text {
+  margin-top: 8px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #000000;
+}
+
+.flowers-button {
+  display: flex;
+  margin-top: 24px;
+  padding: 8px 12px;
+  background: #595CFF;
+  border-radius: 4px; 
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.flowers-button-text {
+  margin-right: 4px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.flowers-container {
+  position: relative;
+}
+
+.flowers-content {
+  position: absolute;
+  top: 43px;
+  left: 80px;
+}
+
+.flowers-best-text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.flowers-offer-text {
+  margin-top: 8px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #000000;
+}
+
+.flowers-button {
+  display: flex;
+  margin-top: 24px;
+  padding: 8px 12px;
+  background: #595CFF;
+  border-radius: 4px; 
+  align-items: center;
+  border: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.flowers-button-text {
+  margin-right: 4px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.gifts-plants {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.gifts-container {
+  position: relative;
+}
+
+.gifts-content {
+  position: absolute;
+  top: 60px;
+  left: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gifts-best-text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.gifts-offer-text {
+  margin-top: 8px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #000000;
+}
+
+.gifts-button {
+  display: flex;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #595CFF;
+  border-radius: 4px; 
+  align-items: center;
+  border: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.gifts-button-text {
+  margin-right: 4px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.plants-container {
+  position: relative;
+}
+
+.plants-content {
+  position: absolute;
+  top: 46px;
+  left: 80px;
+}
+
+.plants-best-text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 28px;
+  color: #FFFFFF;
+}
+
+.plants-offer-text {
+  margin-top: 8px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #FFFFFF;
+}
+
+.plants-button {
+  display: flex;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #595CFF;
+  border-radius: 4px; 
+  align-items: center;
+  border: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.plants-button-text {
+  margin-right: 4px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.new-products {
+  margin-top: 82px;
+  margin-left: 380px;
+}
+
+.popular-products {
+  margin-top: 120px;
+  margin-left: 380px;
+}
+
+.products-text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.products-list {
+  margin-top: 24px;
+  display: flex;
+}
+
+.product-item {
+  margin-right: 24px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.product-info {
+  margin-top: 20px;
+}
+
+.product-item-text {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+  text-align: center;
+}
+
+.product-item-price {
+  margin-top: 8.5px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  text-align: center;
+
+}
