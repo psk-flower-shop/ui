@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { productList } from "services/mocks/productList";
+import { Categories } from "utils/enums";
 import "./ProductsList.scss";
 
 type Props = {
@@ -33,8 +34,8 @@ const ProductsList = ({ category }: Props) => {
   const productsCountLabel =
     productsCount % 10 === 1 ? "produktas" : "produktai";
 
-  const handleProductOpen = (id: string) => {
-    navigate(`product/${id}`);
+  const handleProductOpen = (id: number, category: Categories) => {
+    navigate(`/${category}/${id}`);
   };
 
   return (
@@ -52,7 +53,8 @@ const ProductsList = ({ category }: Props) => {
         {productList.map((product) => (
           <div
             className="products-list-items-item"
-            onClick={(e) => handleProductOpen(product.id)}
+            key={product.id}
+            onClick={(e) => handleProductOpen(product.id, product.category)}
           >
             <img alt="flowy" src={product.image} />
             <div className="products-list-items-item-info">

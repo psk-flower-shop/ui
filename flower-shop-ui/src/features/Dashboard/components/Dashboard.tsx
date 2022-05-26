@@ -4,14 +4,15 @@ import flowersImage from "static/images/flowers.png";
 import giftsImage from "static/images/gifts.png";
 import plantsImage from "static/images/plants.png";
 import arrowIcon from "static/svgs/Arrow.svg";
-import "./Dashboard.scss";
 import { productList } from "services/mocks/productList";
+import { Categories } from "utils/enums";
+import "./Dashboard.scss";
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const handleProductOpen = (id: string) => {
-    navigate(`product/${id}`);
+  const handleProductOpen = (id: number, category: Categories) => {
+    navigate(`${category}/${id}`);
   };
 
   return (
@@ -74,7 +75,7 @@ const Dashboard = () => {
           {productList.map((product) => (
             <div
               className="product-item"
-              onClick={(e) => handleProductOpen(product.id)}
+              onClick={(e) => handleProductOpen(product.id, product.category)}
             >
               <img alt="flowy" src={product.image} />
               <div className="product-info">
@@ -92,7 +93,7 @@ const Dashboard = () => {
           {productList.map((product) => (
             <div
               className="product-item"
-              onClick={(e) => handleProductOpen(product.id)}
+              onClick={(e) => handleProductOpen(product.id, product.category)}
             >
               <img alt="flowy" src={product.image} />
               <div className="product-info">
