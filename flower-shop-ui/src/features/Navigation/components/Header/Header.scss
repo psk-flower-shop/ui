@@ -1,0 +1,62 @@
+.header {
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  /* Neutrals/White */
+
+  background: #FFFFFF;
+}
+
+.location-group {
+  position: absolute;
+  left: 10%;
+  top: 5%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.location {
+  margin-right: 5px;
+
+}
+
+.main-name {
+  position: absolute;
+  left: 46%;
+  top: 5%;
+  
+  /* Text/Button, 14px */
+  
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height, or 121% */
+  
+  
+  color: #000000;
+}
+
+.icon-group {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px;
+  left: 90%;
+  top: 5%;
+}
+
+.icon-group__icon {
+  margin-right: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
