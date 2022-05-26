@@ -1,18 +1,21 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Homepage from "features/Homepage";
-import Shop from "features/Shop";
+import Dashboard from "features/Dashboard";
+import ProductsList from "features/ProductsList";
 
 const AuthenticatedRoutes = () => {
   return (
-    <div>
-      <h1>Authenticated App</h1>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="*" element={<div>not found</div>} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/flowers" element={<ProductsList category="flowers" />} />
+      <Route path="/plants" element={<ProductsList category="plants" />} />
+      <Route path="/gifts" element={<ProductsList category="gifts" />} />
+      <Route
+        path="/trappings"
+        element={<ProductsList category="trappings" />}
+      />
+      <Route path="*" element={<div>not found</div>} />
+    </Routes>
   );
 };
 
