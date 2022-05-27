@@ -16,7 +16,7 @@ export const requestAddToWishlist = async (
 export const requestWishlist = async (userId: string) => {
   try {
     const response = await axios.get(
-      `https://localhost:7271/api/user/favorite/${userId}`
+      `https://localhost:7271/api/user/favourite/${userId}`
     );
     return response.data;
   } catch (e) {
