@@ -10,10 +10,12 @@ import "./ProductItem.scss";
 import { Categories } from "utils/enums";
 import { selectProductById } from "features/Dashboard";
 import flowerMockImage from "static/images/flowerMock.png";
+import { useUser } from "context";
 
 const ProductItem = () => {
   const [counter, setCounter] = useState<number>(0);
   const navigate = useNavigate();
+  const user = useUser();
 
   let { productId } = useParams();
 
@@ -47,12 +49,14 @@ const ProductItem = () => {
           <div className="product-item-values">
             <div className="product-item-values-header">
               {product.name} (kaina už vnt.){" "}
-              <img
-                alt="heart"
-                src={wishlistIcon}
-                style={{ cursor: "pointer" }}
-                onClick={(e) => handleWishlist(product.id)}
-              />
+              {user && (
+                <img
+                  alt="heart"
+                  src={wishlistIcon}
+                  style={{ cursor: "pointer" }}
+                  onClick={(e) => handleWishlist(product.id)}
+                />
+              )}
             </div>
             <div className="product-item-values-price">
               {product.price}&#8364;
