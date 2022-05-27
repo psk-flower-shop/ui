@@ -81,37 +81,51 @@ const Dashboard = () => {
       <div className="new-products">
         <div className="products-text">Naujausi Produktai</div>
         <div className="products-list">
-          {products.map((product) => (
-            <div
-              className="product-item"
-              onClick={(e) => handleProductOpen(product.id, product.category)}
-            >
-              <img alt="flowy" src={flowerMockImage} />
-              <div className="product-info">
-                <div className="product-item-text">{product.name}</div>
-                <div className="product-item-price">{product.price}&#8364;</div>
-              </div>
-            </div>
-          ))}
+          {products.map(
+            (product, index) =>
+              index < 4 && (
+                <div
+                  className="product-item"
+                  onClick={(e) =>
+                    handleProductOpen(product.id, product.category)
+                  }
+                >
+                  <img alt="flowy" src={flowerMockImage} />
+                  <div className="product-info">
+                    <div className="product-item-text">{product.name}</div>
+                    <div className="product-item-price">
+                      {product.price}&#8364;
+                    </div>
+                  </div>
+                </div>
+              )
+          )}
         </div>
       </div>
 
       <div className="popular-products">
         <div className="products-text">Populiariausi Produktai</div>
         <div className="products-list">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="product-item"
-              onClick={(e) => handleProductOpen(product.id, product.category)}
-            >
-              <img alt="flowy" src={flowerMockImage} />
-              <div className="product-info">
-                <div className="product-item-text">{product.name}</div>
-                <div className="product-item-price">{product.price}&#8364;</div>
-              </div>
-            </div>
-          ))}
+          {products.map(
+            (product, index) =>
+              index < 4 && (
+                <div
+                  key={product.id}
+                  className="product-item"
+                  onClick={(e) =>
+                    handleProductOpen(product.id, product.category)
+                  }
+                >
+                  <img alt="flowy" src={flowerMockImage} />
+                  <div className="product-info">
+                    <div className="product-item-text">{product.name}</div>
+                    <div className="product-item-price">
+                      {product.price}&#8364;
+                    </div>
+                  </div>
+                </div>
+              )
+          )}
         </div>
       </div>
     </>
