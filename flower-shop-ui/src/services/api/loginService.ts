@@ -3,12 +3,10 @@ import { User } from "context/user/userTypes";
 
 export const getUserById = async (id: string) => {
   try {
-    const response = await axios.get(
-      `https://localhost:7271/api/login/user/${id}`,
-      {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      }
-    );
+    const response = await axios.get(`https://localhost:7271/api/login/user`, {
+      params: { token: id },
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
     return response.data;
   } catch (error) {
     throw error;
