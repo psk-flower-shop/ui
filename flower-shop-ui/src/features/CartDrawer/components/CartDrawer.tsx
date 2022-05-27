@@ -6,7 +6,7 @@ import "./CartDrawer.scss";
 import flowerImageMock from "static/images/flowerMock.png";
 import { ProductType } from "features/ProductsList/state/productsListTypes";
 import { useUser } from "context";
-import { requestCart } from "services/api/cartService";
+import { requestCart, requestReservation } from "services/api/cartService";
 
 type Props = {
   isOpen: boolean;
@@ -15,9 +15,23 @@ type Props = {
 
 const CartDrawer = ({ isOpen, onClose }: Props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+
   const user = useUser();
-  const handleReserveCall = () => {
-    console.log("fuck this shit im out");
+  const handleReserveCall = async () => {
+    if (user && user.id) {
+      try {
+        setLoading(true);
+        await requestReservation(user.id);
+        setMessage("Reservacija baigta!");
+        await getCartProducts();
+      } catch (e) {
+        alert("failed to reserve");
+        setLoading(false);
+      }
+      setLoading(false);
+    }
   };
 
   const getCartProducts = async () => {
@@ -35,10 +49,15 @@ const CartDrawer = ({ isOpen, onClose }: Props) => {
     getCartProducts();
   }, [isOpen]);
 
+  const handleClose = () => {
+    setMessage("");
+    onClose();
+  };
+
   return (
     <Drawer
       open={isOpen}
-      onClose={onClose}
+      onClose={handleClose}
       className="cart-drawer"
       direction="right"
     >
@@ -49,7 +68,7 @@ const CartDrawer = ({ isOpen, onClose }: Props) => {
             alt="close"
             className="cart-drawer-close-icon"
             src={closeIcon}
-            onClick={(e) => onClose()}
+            onClick={(e) => handleClose()}
           />
         </div>
         <div className="cart-drawer-header-divider" />
@@ -77,12 +96,17 @@ const CartDrawer = ({ isOpen, onClose }: Props) => {
             </div>
           ))}
         </div>
-        <button
-          onClick={(e) => handleReserveCall()}
-          className="cart-drawer-reserve"
-        >
-          Rezervuoti
-        </button>
+        {products.length > 0 ? (
+          <button
+            onClick={(e) => handleReserveCall()}
+            className={
+              loading ? "cart-drawer-reserve-loading" : "cart-drawer-reserve"
+            }
+          >
+            {loading ? "Rezervuojama..." : "Rezervuoti"}
+          </button>
+        ) : null}
+        {message !== "" ? <div>{message}</div> : null}
       </div>
     </Drawer>
   );
