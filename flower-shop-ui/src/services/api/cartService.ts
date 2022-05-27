@@ -18,3 +18,11 @@ export const requestAddToCart = async (id: string, productId: string) => {
     throw e;
   }
 };
+
+export const requestReservation = async (id: string) => {
+  try {
+    await axios.post(`https://localhost:7271/api/cart/reservation/${id}/`);
+  } catch (e) {
+    throw e;
+  }
+};

@@ -98,15 +98,19 @@ const ProductItem = () => {
               />
             </div>
             <div className="product-item-values-buttons">
-              <button
-                className="product-item-values-button-blue"
-                onClick={(e) => handleAddToCart()}
-              >
-                {loading ? "Palaukite..." : "Pridėti į krepšelį"}
-              </button>
-              <div className="product-item-values-button-cart">
-                <img alt="carts" src={cartIcon} />
-              </div>
+              {user && (
+                <>
+                  <button
+                    className="product-item-values-button-blue"
+                    onClick={(e) => handleAddToCart()}
+                  >
+                    {loading ? "Palaukite..." : "Pridėti į krepšelį"}
+                  </button>
+                  <div className="product-item-values-button-cart">
+                    <img alt="carts" src={cartIcon} />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
