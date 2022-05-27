@@ -12,10 +12,12 @@ import flowerMockImage from "static/images/flowerMock.png";
 import { useUser } from "context";
 import { selectCategoryProducts } from "features/ProductsList/state/productListSelectors";
 import { requestAddToCart } from "services/api/cartService";
+import { requestAddToWishlist } from "services/api/wishListService";
 
 const ProductItem = () => {
   const [counter, setCounter] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
   const navigate = useNavigate();
   const user = useUser();
 
@@ -37,8 +39,15 @@ const ProductItem = () => {
     navigate(`/${category}/${id}`);
   };
 
-  const handleWishlist = (id: string) => {
-    console.log(id);
+  const handleWishlist = async (productId: string) => {
+    if (user && user.id && message === "") {
+      try {
+        await requestAddToWishlist(user.id, productId);
+        setMessage("Sėkmingai pridėta į favoritus!");
+      } catch (e) {
+        alert("failed to add to wishlist");
+      }
+    }
   };
 
   const handleAddToCart = async () => {
@@ -67,12 +76,17 @@ const ProductItem = () => {
             <div className="product-item-values-header">
               {product.name} (kaina už vnt.){" "}
               {user && (
-                <img
-                  alt="heart"
-                  src={wishlistIcon}
-                  style={{ cursor: "pointer" }}
-                  onClick={(e) => handleWishlist(product.id)}
-                />
+                <>
+                  <img
+                    alt="heart"
+                    src={wishlistIcon}
+                    style={{ cursor: "pointer" }}
+                    onClick={(e) => handleWishlist(product.id)}
+                  />
+                  {message !== "" ? (
+                    <span style={{ color: "green" }}>{message}</span>
+                  ) : null}
+                </>
               )}
             </div>
             <div className="product-item-values-price">

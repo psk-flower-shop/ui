@@ -36,12 +36,12 @@ const CartDrawer = ({ isOpen, onClose }: Props) => {
 
   const getCartProducts = async () => {
     try {
-      if (user && user.id) {
+      if (user && user.id && isOpen) {
         const products = await requestCart(user.id);
         setProducts(products);
       }
     } catch (e) {
-      alert("failed to get products");
+      alert("failed to get cart");
     }
   };
 

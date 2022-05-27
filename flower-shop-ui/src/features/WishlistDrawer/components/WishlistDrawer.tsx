@@ -1,9 +1,12 @@
-import React from "react";
+import { useUser } from "context";
+import { ProductType } from "features/ProductsList/state/productsListTypes";
+import React, { useEffect, useState } from "react";
 import Drawer from "react-modern-drawer";
 import { useNavigate } from "react-router-dom";
-import { productList } from "services/mocks/productList";
 import closeIcon from "static/svgs/Close.svg";
 import { Categories } from "utils/enums";
+import flowerMockImage from "static/images/flowerMock.png";
+import { requestWishlist } from "services/api/wishListService";
 
 type Props = {
   isOpen: boolean;
@@ -11,11 +14,29 @@ type Props = {
 };
 
 const WishlistDrawer = ({ isOpen, onClose }: Props) => {
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const user = useUser();
   const navigate = useNavigate();
+
   const handleOpenItem = (id: string, category: Categories) => {
     navigate(`/${category}/${id}`);
     onClose();
   };
+
+  const getWishlist = async () => {
+    try {
+      if (user && user.id && isOpen) {
+        const products = await requestWishlist(user.id);
+        setProducts(products);
+      }
+    } catch (e) {
+      alert("failed to get wishlist");
+    }
+  };
+
+  useEffect(() => {
+    getWishlist();
+  }, [isOpen]);
 
   return (
     <Drawer
@@ -36,17 +57,17 @@ const WishlistDrawer = ({ isOpen, onClose }: Props) => {
         </div>
         <div className="cart-drawer-header-divider" />
         <div className="cart-drawer-list">
-          {productList.map((product) => (
+          {products.map((product) => (
             <div key={product.id} className="cart-drawer-list-item">
               <img
                 alt="flowerino"
-                src={product.image}
+                src={flowerMockImage}
                 className="cart-drawer-image"
               />
               <div>
                 <div className="cart-drawer-item-header">
                   <div className="cart-drawer-item-header-text">
-                    {product.title}
+                    {product.name}
                   </div>
                   <div className="cart-drawer-item-header-price">
                     {product.price}&#8364;
