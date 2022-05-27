@@ -31,7 +31,7 @@ const ProductItem = () => {
     }
   };
 
-  const handleProductOpen = (id: number, category: Categories) => {
+  const handleProductOpen = (id: string, category: Categories) => {
     navigate(`/${category}/${id}`);
   };
 

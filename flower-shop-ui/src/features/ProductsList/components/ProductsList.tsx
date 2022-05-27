@@ -34,7 +34,7 @@ const ProductsList = ({ category }: Props) => {
   const productsCountLabel =
     productsCount % 10 === 1 ? "produktas" : "produktai";
 
-  const handleProductOpen = (id: number, category: Categories) => {
+  const handleProductOpen = (id: string, category: Categories) => {
     navigate(`/${category}/${id}`);
   };
 
