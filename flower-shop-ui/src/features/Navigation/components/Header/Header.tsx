@@ -38,7 +38,7 @@ const Header = ({ onCartOpen, onWishlistOpen }: Props) => {
       <div className="main-name">.WET CORE FLOWER SHOP</div>
       <div className="icon-group">
         <img alt="search" src={searchIcon} className="icon-group__icon" />
-        {!user && (
+        {user && (
           <>
             <img
               alt="cart"

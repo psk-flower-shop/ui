@@ -37,7 +37,7 @@ function App() {
         {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
       </div>
       <Footer />
-      {!user && (
+      {user && (
         <>
           <CartDrawer isOpen={isCartDrawerOpen} onClose={handleCartDrawer} />
           <WishlistDrawer

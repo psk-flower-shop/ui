@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import flowersImage from "static/images/flowers.png";
 import giftsImage from "static/images/gifts.png";
 import plantsImage from "static/images/plants.png";
 import arrowIcon from "static/svgs/Arrow.svg";
-import { productList } from "services/mocks/productList";
 import { Categories } from "utils/enums";
 import "./Dashboard.scss";
+import { fetchProducts } from "../state/dashboardThunks";
+import { selectAllProducts } from "../state/dashboardSelectors";
+import { useDispatch, useSelector } from "store/storeHooks";
+import flowerMockImage from "static/images/flowerMock.png";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const products = useSelector(selectAllProducts);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const handleProductOpen = (id: string, category: Categories) => {
     navigate(`${category}/${id}`);
@@ -72,14 +81,14 @@ const Dashboard = () => {
       <div className="new-products">
         <div className="products-text">Naujausi Produktai</div>
         <div className="products-list">
-          {productList.map((product) => (
+          {products.map((product) => (
             <div
               className="product-item"
               onClick={(e) => handleProductOpen(product.id, product.category)}
             >
-              <img alt="flowy" src={product.image} />
+              <img alt="flowy" src={flowerMockImage} />
               <div className="product-info">
-                <div className="product-item-text">{product.title}</div>
+                <div className="product-item-text">{product.name}</div>
                 <div className="product-item-price">{product.price}&#8364;</div>
               </div>
             </div>
@@ -90,14 +99,15 @@ const Dashboard = () => {
       <div className="popular-products">
         <div className="products-text">Populiariausi Produktai</div>
         <div className="products-list">
-          {productList.map((product) => (
+          {products.map((product) => (
             <div
+              key={product.id}
               className="product-item"
               onClick={(e) => handleProductOpen(product.id, product.category)}
             >
-              <img alt="flowy" src={product.image} />
+              <img alt="flowy" src={flowerMockImage} />
               <div className="product-info">
-                <div className="product-item-text">{product.title}</div>
+                <div className="product-item-text">{product.name}</div>
                 <div className="product-item-price">{product.price}&#8364;</div>
               </div>
             </div>
