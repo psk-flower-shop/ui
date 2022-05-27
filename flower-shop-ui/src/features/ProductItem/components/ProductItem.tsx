@@ -6,6 +6,7 @@ import { productList } from "services/mocks/productList";
 import plusIcon from "static/svgs/Plus.svg";
 import minusIcon from "static/svgs/Minus.svg";
 import cartIcon from "static/svgs/Cart.svg";
+import wishlistIcon from "static/svgs/Wishlist.svg";
 import "./ProductItem.scss";
 import { Categories } from "utils/enums";
 
@@ -35,17 +36,27 @@ const ProductItem = () => {
     navigate(`/${category}/${id}`);
   };
 
+  const handleWishlist = (id: string) => {
+    console.log(id);
+  };
+
   return (
     <div className="product-item-root">
       <div className="product-item-info">
         <img
-          alt="product-item"
+          alt="produsct-item"
           className="product-item-image"
           src={product.image}
         />
         <div className="product-item-values">
           <div className="product-item-values-header">
-            {product.title} (kaina už vnt.)
+            {product.title} (kaina už vnt.){" "}
+            <img
+              alt="heart"
+              src={wishlistIcon}
+              style={{ cursor: "pointer" }}
+              onClick={(e) => handleWishlist(product.id)}
+            />
           </div>
           <div className="product-item-values-price">
             {product.price}&#8364;
