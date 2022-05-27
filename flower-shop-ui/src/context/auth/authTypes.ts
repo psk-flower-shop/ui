@@ -2,9 +2,9 @@ import { User } from "context/user/userTypes";
 
 export interface AuthContextInterface {
   data: AuthData;
-  login: () => void;
+  login: (user: User) => void;
   logout: () => void;
-  register: () => void;
+  register: (user: User) => void;
 }
 
 export const authContextDefaults: AuthContextInterface = {

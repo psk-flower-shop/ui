@@ -1,5 +1,12 @@
-import React from "react";
-import { authContextDefaults, AuthContextInterface } from "./authTypes";
+import { User } from "context/user/userTypes";
+import React, { useEffect } from "react";
+import { getUserById, requestLogin } from "services/api/loginService";
+import { requestRegister } from "services/api/registerService";
+import {
+  authContextDefaults,
+  AuthContextInterface,
+  AuthData,
+} from "./authTypes";
 
 type Props = {
   children: React.ReactNode;
@@ -9,25 +16,59 @@ const AuthContext =
   React.createContext<AuthContextInterface>(authContextDefaults);
 
 const AuthProvider = ({ children }: Props) => {
-  //TODO: code for pre-loading the user's info if we have their token in local storage
-  // const [data, setData] = React.useState<AuthData>({});
-  const data = {};
+  const [data, setData] = React.useState<AuthData>({});
+  const [loading, setLoading] = React.useState<boolean>(false);
 
-  //TODO: if needed local storage goes here
+  const tryToGetUser = async () => {
+    const token = window.localStorage.getItem("flowerUiAuthToken");
+    if (token) {
+      setLoading(true);
+      try {
+        const userResponse = await getUserById(token);
+        const newData = {
+          user: userResponse,
+        };
+        setData(newData);
+      } catch (e) {
+        setLoading(false);
+      }
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    tryToGetUser();
+  }, []);
 
   // 🚨 this is an important bit.
   // Normally the provider components render the context provider with a value.
   // But we post-pone rendering any of the children until after we've determined
   // whether or not we have a user token and if we do, then we render a spinner
   // while we go retrieve that user's information.
-  if (!data) {
+  if (loading) {
     return <div>waiting...</div>;
   }
 
-  const login = () => {}; // make a login request
-  const register = () => {}; // register the user
+  const login = (user: User) => {
+    requestLogin(user)
+      .then((token) => {
+        window.localStorage.setItem("flowerUiAuthToken", token);
+        tryToGetUser();
+      })
+      .catch((e) => {
+        alert("failed to login");
+      });
+  }; // make a login request
+  const register = async (user: User) => {
+    try {
+      await requestRegister(user);
+    } catch (e) {
+      alert("failed to register");
+    }
+  }; // register the user
   const logout = () => {
     window.localStorage.removeItem("flowerUiAuthToken");
+    window.location.reload();
   }; // logout the user
 
   return (

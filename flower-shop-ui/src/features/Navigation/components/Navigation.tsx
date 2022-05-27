@@ -3,10 +3,15 @@ import Categories from "./Categories/Categories";
 import Header from "./Header/Header";
 import "./Navigation.scss";
 
-const Navigation = () => {
+type Props = {
+  onCartOpen: () => void;
+  onWishlistOpen: () => void;
+};
+
+const Navigation = ({ onCartOpen, onWishlistOpen }: Props) => {
   return (
     <div className="navigation">
-      <Header />
+      <Header onCartOpen={onCartOpen} onWishlistOpen={onWishlistOpen} />
       <Categories />
     </div>
   );

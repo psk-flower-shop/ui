@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "features/Dashboard";
 import ProductsList from "features/ProductsList";
+import ProductItem from "features/ProductItem";
 
 const AuthenticatedRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AuthenticatedRoutes = () => {
         path="/trappings"
         element={<ProductsList category="trappings" />}
       />
+      <Route path="/:categoryName/:productId" element={<ProductItem />} />
       <Route path="*" element={<div>not found</div>} />
     </Routes>
   );
