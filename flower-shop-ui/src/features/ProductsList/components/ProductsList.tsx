@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { productList } from "services/mocks/productList";
 import { Categories } from "utils/enums";
 import "./ProductsList.scss";
+import {getProducts} from "services/api/productService"
 
 type Props = {
   category: string;
 };
+
+type ProductType ={
+  id: string,
+  category : Categories,
+  price: number,
+  name: string,
+  amount: number
+  
+
+
+}
+
 
 function convertCategory(category: string): string {
   switch (category) {
@@ -29,6 +41,7 @@ function convertCategory(category: string): string {
 }
 
 const ProductsList = ({ category }: Props) => {
+  const [productList, setProducts] = useState<ProductType[]>([]);
   const navigate = useNavigate();
   const productsCount = productList.length;
   const productsCountLabel =
@@ -37,6 +50,16 @@ const ProductsList = ({ category }: Props) => {
   const handleProductOpen = (id: string, category: Categories) => {
     navigate(`/${category}/${id}`);
   };
+
+  const GetProductsFromApi = async () => {
+    const products = await getProducts();
+    setProducts(products);
+ 
+  }
+  
+  useEffect(() => {
+    GetProductsFromApi()
+  },[])
 
   return (
     <div className="products-list-container">
@@ -56,10 +79,10 @@ const ProductsList = ({ category }: Props) => {
             key={product.id}
             onClick={(e) => handleProductOpen(product.id, product.category)}
           >
-            <img alt="flowy" src={product.image} />
+            {/* <img alt="flowy" src={product.image} /> */}
             <div className="products-list-items-item-info">
               <div className="products-list-items-item-text">
-                {product.title}
+                {product.name}
               </div>
               <div className="products-list-items-item-price">
                 {product.price}&#8364;
