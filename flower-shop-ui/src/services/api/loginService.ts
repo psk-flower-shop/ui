@@ -4,7 +4,7 @@ import { User } from "context/user/userTypes";
 export const getUserById = async (id: string) => {
   try {
     const response = await axios.get(
-      `https://localhost:7271/api/login/users/${id}`,
+      `https://localhost:7271/api/login/user/${id}`,
       {
         headers: { "Access-Control-Allow-Origin": "*" },
       }
