@@ -61,26 +61,29 @@ const ProductsList = ({ category }: Props) => {
       </div>
       <div className="products-list-header-divider" />
       <div className="products-list-items">
-        {products.map((product) => (
-          <div
-            className="products-list-items-item"
-            key={product.id}
-            onClick={(e) => handleProductOpen(product.id, product.category)}
-          >
-            <img alt="flowy" src={flowerMockImage} />
-            <div className="products-list-items-item-info">
-              <div className="products-list-items-item-text">
-                {product.name}
+        {products.map(
+          (product, index) =>
+            index < 6 && (
+              <div
+                className="products-list-items-item"
+                key={product.id}
+                onClick={(e) => handleProductOpen(product.id, product.category)}
+              >
+                <img alt="flowy" src={flowerMockImage} />
+                <div className="products-list-items-item-info">
+                  <div className="products-list-items-item-text">
+                    {product.name}
+                  </div>
+                  <div className="products-list-items-item-price">
+                    {product.price}&#8364;
+                  </div>
+                </div>
               </div>
-              <div className="products-list-items-item-price">
-                {product.price}&#8364;
-              </div>
-            </div>
-          </div>
-        ))}
+            )
+        )}
       </div>
       <div className="show-more-container">
-        <button className="show-more">Rodyti daugiau</button>
+        {/* <button className="show-more">Rodyti daugiau</button> */}
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ export type ProductType = {
   price: number;
   name: string;
   amount: number;
+  quantity?: number;
 };
 
 export type ProductsListState = {

@@ -1,6 +1,6 @@
 import React from "react";
 import locationIcon from "static/svgs/Location.svg";
-import searchIcon from "static/svgs/Search.svg";
+// import searchIcon from "static/svgs/Search.svg";
 import cartIcon from "static/svgs/Cart.svg";
 import wishlistIcon from "static/svgs/Wishlist.svg";
 import loginIcon from "static/svgs/Login.svg";
@@ -37,7 +37,7 @@ const Header = ({ onCartOpen, onWishlistOpen }: Props) => {
       </div>
       <div className="main-name">.WET CORE FLOWER SHOP</div>
       <div className="icon-group">
-        <img alt="search" src={searchIcon} className="icon-group__icon" />
+        {/* <img alt="search" src={searchIcon} className="icon-group__icon" /> */}
         {user && (
           <>
             <img

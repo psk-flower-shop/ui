@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "store/storeHooks";
-import { productList } from "services/mocks/productList";
 import plusIcon from "static/svgs/Plus.svg";
 import minusIcon from "static/svgs/Minus.svg";
 import cartIcon from "static/svgs/Cart.svg";
@@ -11,13 +10,18 @@ import { Categories } from "utils/enums";
 import { selectProductById } from "features/Dashboard";
 import flowerMockImage from "static/images/flowerMock.png";
 import { useUser } from "context";
+import { selectCategoryProducts } from "features/ProductsList/state/productListSelectors";
+import { requestAddToCart } from "services/api/cartService";
 
 const ProductItem = () => {
   const [counter, setCounter] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const user = useUser();
 
   let { productId } = useParams();
+
+  const categoryProducts = useSelector(selectCategoryProducts);
 
   const product = useSelector((state) => selectProductById(state, productId));
 
@@ -35,6 +39,19 @@ const ProductItem = () => {
 
   const handleWishlist = (id: string) => {
     console.log(id);
+  };
+
+  const handleAddToCart = async () => {
+    if (user && user.id && product) {
+      setLoading(true);
+      try {
+        await requestAddToCart(user.id, product.id);
+        setLoading(false);
+      } catch (e) {
+        alert("failed to add to cart");
+        setLoading(false);
+      }
+    }
   };
 
   return (
@@ -81,8 +98,11 @@ const ProductItem = () => {
               />
             </div>
             <div className="product-item-values-buttons">
-              <button className="product-item-values-button-blue">
-                Pridėti į krepšelį
+              <button
+                className="product-item-values-button-blue"
+                onClick={(e) => handleAddToCart()}
+              >
+                {loading ? "Palaukite..." : "Pridėti į krepšelį"}
               </button>
               <div className="product-item-values-button-cart">
                 <img alt="carts" src={cartIcon} />
@@ -96,22 +116,27 @@ const ProductItem = () => {
           Populiariausi Produktai
         </div>
         <div className="product-item-most-popular-list">
-          {productList.map((product) => (
-            <div
-              className="product-item-most-popular-list-item"
-              onClick={(e) => handleProductOpen(product.id, product.category)}
-            >
-              <img alt="flowy" src={product.image} />
-              <div className="product-item-most-popular-list-item-info">
-                <div className="product-item-most-popular-list-item-info-text">
-                  {product.title}
+          {categoryProducts.map(
+            (product, index) =>
+              index < 4 && (
+                <div
+                  className="product-item-most-popular-list-item"
+                  onClick={(e) =>
+                    handleProductOpen(product.id, product.category)
+                  }
+                >
+                  <img alt="flowy" src={flowerMockImage} />
+                  <div className="product-item-most-popular-list-item-info">
+                    <div className="product-item-most-popular-list-item-info-text">
+                      {product.name}
+                    </div>
+                    <div className="product-item-most-popular-list-item-info-price">
+                      {product.price}&#8364;
+                    </div>
+                  </div>
                 </div>
-                <div className="product-item-most-popular-list-item-info-price">
-                  {product.price}&#8364;
-                </div>
-              </div>
-            </div>
-          ))}
+              )
+          )}
         </div>
       </div>
     </div>
