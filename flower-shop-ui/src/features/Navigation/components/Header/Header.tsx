@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth/AuthContext";
 
 type Props = {
-  onOpen: () => void;
+  onCartOpen: () => void;
+  onWishlistOpen: () => void;
 };
 
-const Header = ({ onOpen }: Props) => {
+const Header = ({ onCartOpen, onWishlistOpen }: Props) => {
   const { logout } = useAuth();
   const user = useUser();
   const navigate = useNavigate();
@@ -43,12 +44,13 @@ const Header = ({ onOpen }: Props) => {
               alt="cart"
               src={cartIcon}
               className="icon-group__icon"
-              onClick={(e) => onOpen()}
+              onClick={(e) => onCartOpen()}
             />
             <img
               alt="wishlist"
               src={wishlistIcon}
               className="icon-group__icon"
+              onClick={(e) => onWishlistOpen()}
             />
           </>
         )}

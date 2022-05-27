@@ -11,7 +11,7 @@ import "./Dashboard.scss";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const handleProductOpen = (id: number, category: Categories) => {
+  const handleProductOpen = (id: string, category: Categories) => {
     navigate(`${category}/${id}`);
   };
 
