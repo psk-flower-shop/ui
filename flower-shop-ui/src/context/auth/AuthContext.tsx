@@ -23,11 +23,15 @@ const AuthProvider = ({ children }: Props) => {
     const token = window.localStorage.getItem("flowerUiAuthToken");
     if (token) {
       setLoading(true);
-      const userResponse = await getUserById(token);
-      const newData = {
-        user: userResponse,
-      };
-      setData(newData);
+      try {
+        const userResponse = await getUserById(token);
+        const newData = {
+          user: userResponse,
+        };
+        setData(newData);
+      } catch (e) {
+        setLoading(false);
+      }
       setLoading(false);
     }
   };
@@ -64,6 +68,7 @@ const AuthProvider = ({ children }: Props) => {
   }; // register the user
   const logout = () => {
     window.localStorage.removeItem("flowerUiAuthToken");
+    window.location.reload();
   }; // logout the user
 
   return (
