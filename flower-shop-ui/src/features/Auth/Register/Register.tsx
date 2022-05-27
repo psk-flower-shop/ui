@@ -1,15 +1,26 @@
+import { useAuth } from "context/auth/AuthContext";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import "./Register.scss";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const auth = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (data: any) => {
+    try {
+      auth.register(data);
+      navigate("/login");
+    } catch (e) {
+      alert("failed to register");
+    }
+  };
 
   return (
     <div className="content">

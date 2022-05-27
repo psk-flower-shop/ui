@@ -1,3 +1,4 @@
+import { useAuth } from "context/auth/AuthContext";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +11,16 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (data: any) => {
+    try {
+      login(data);
+      navigate("/");
+    } catch (e) {
+      alert("failed to login");
+    }
+  };
 
   return (
     <div className="content">

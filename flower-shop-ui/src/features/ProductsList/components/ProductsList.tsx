@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Categories } from "utils/enums";
 import "./ProductsList.scss";
-import {getProducts} from "services/api/productService"
+import { useDispatch, useSelector } from "store/storeHooks";
+import { selectCategoryProducts } from "../state/productListSelectors";
+import { fetchProductsByCategory } from "../state/productListThunks";
+import flowerMockImage from "static/images/flowerMock.png";
 
 type Props = {
   category: string;
 };
-
-type ProductType ={
-  id: string,
-  category : Categories,
-  price: number,
-  name: string,
-  amount: number
-  
-
-
-}
-
 
 function convertCategory(category: string): string {
   switch (category) {
@@ -41,9 +32,12 @@ function convertCategory(category: string): string {
 }
 
 const ProductsList = ({ category }: Props) => {
-  const [productList, setProducts] = useState<ProductType[]>([]);
   const navigate = useNavigate();
-  const productsCount = productList.length;
+
+  const dispatch = useDispatch();
+  const products = useSelector(selectCategoryProducts);
+
+  const productsCount = products.length;
   const productsCountLabel =
     productsCount % 10 === 1 ? "produktas" : "produktai";
 
@@ -51,15 +45,9 @@ const ProductsList = ({ category }: Props) => {
     navigate(`/${category}/${id}`);
   };
 
-  const GetProductsFromApi = async () => {
-    const products = await getProducts();
-    setProducts(products);
- 
-  }
-  
   useEffect(() => {
-    GetProductsFromApi()
-  },[])
+    dispatch(fetchProductsByCategory(category));
+  }, [dispatch, category]);
 
   return (
     <div className="products-list-container">
@@ -73,13 +61,13 @@ const ProductsList = ({ category }: Props) => {
       </div>
       <div className="products-list-header-divider" />
       <div className="products-list-items">
-        {productList.map((product) => (
+        {products.map((product) => (
           <div
             className="products-list-items-item"
             key={product.id}
             onClick={(e) => handleProductOpen(product.id, product.category)}
           >
-            {/* <img alt="flowy" src={product.image} /> */}
+            <img alt="flowy" src={flowerMockImage} />
             <div className="products-list-items-item-info">
               <div className="products-list-items-item-text">
                 {product.name}
